@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import seakunPage from "../pages/seakun"
+import seakunPage from "../pages/seakun";
 
 Cypress.on("uncaught:exception", (err, runnable) => {
   // returning false here prevents Cypress from
@@ -104,7 +104,10 @@ describe("Testing Website Seakun id", () => {
   });
 
   it("Test pengguna seakun youtube", () => {
-    seakunPage.getTabPengguna().contains("Youtube").click()
+    seakunPage
+      .getTabPengguna()
+      .contains("Youtube")
+      .click()
       .then((el) => {
         if (Cypress.dom.isVisible(el)) {
           seakunPage.getTabPenggunaActive().should("be.visible");
@@ -117,15 +120,20 @@ describe("Testing Website Seakun id", () => {
   it("Test pengguna seakun youtube full", () => {
     seakunPage.getTabPengguna().contains("Youtube").click();
     cy.wait(5000);
-    seakunPage.getPengguna().contains("full").should("be.visible")
+    seakunPage
+      .getPengguna()
+      .contains("full")
+      .should("be.visible")
       .then((el) => {
         if (Cypress.dom.isVisible(el)) {
-          seakunPage.getPengguna()
+          seakunPage
+            .getPengguna()
             .find("button[data-v-9e7fa756]")
             .contains("Pesan Sekarang")
             .should("be.disabled");
         } else {
-          seakunPage.getPengguna()
+          seakunPage
+            .getPengguna()
             .find("button[data-v-9e7fa756]")
             .contains("Pesan Sekarang")
             .should("not.be.disabled");
@@ -169,10 +177,7 @@ describe("Testing Website Seakun id", () => {
   });
 
   it("Should able to view price schema for each product", () => {
-    seakunPage.getProductLists()
-      .should("have.length", 27)
-      .contains("Lihat skema harga")
-      .should("be.visible");
+    seakunPage.getProductLists().should("have.length", 27).contains("Lihat skema harga").should("be.visible");
 
     // old code
     // cy.get("@product").eq(1).contains("Lihat skema harga").click();
@@ -244,12 +249,8 @@ describe("Testing Website Seakun id", () => {
     seakunPage.getModalPopup().contains("button", "Pilih").click();
     seakunPage.getDropdownMasaBerlangganan().click();
     seakunPage.getPaymentList().contains("3 bulan ( Rp84.000 )").click();
-    seakunPage.getFormName().type("Anonim");
-    seakunPage.getFormName().should("have.value", "Anonim");
-    seakunPage.getFormEmail().type("anonim@gmail.com");
-    seakunPage.getFormEmail().should("have.value", "anonim@gmail.com");
-    seakunPage.getFormPhone().type("82123456789");
-    seakunPage.getFormPhone().should("have.value", "82123456789");
+
+    seakunPage.fillOrderForm("Anonim", "anonim@gmail.com", "82123456789");
 
     // correction
     // make sure the button is disabled before accepting the terms and conditions
