@@ -13,6 +13,7 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
-    "clipboardy": "^3.0.0"
+    "clipboardy": "^3.0.0",
+    "cypress-real-events": "^1.7.6"
   }
 }
